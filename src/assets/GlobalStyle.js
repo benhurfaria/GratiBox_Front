@@ -2,7 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: #5763B7;
+    background: #6d7ce4;
+    font-family: 'Roboto', sans-serif;
   }
   a{
     color: inherit;
