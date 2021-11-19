@@ -23,4 +23,18 @@ function signUp(body) {
   return promise;
 }
 
-export { signUp };
+function signIn(body) {
+  const route = 'sign-in';
+  const promise = axios.post(api + route, body);
+  promise.catch((err) => {
+    if (err.response.status === 401) {
+      alert('Conta não cadastrada');
+    }
+    if (err.response.status === 500) {
+      alert('não foi possivel logar, tente novamente mais tarde');
+    }
+  });
+  return promise;
+}
+
+export { signUp, signIn };
