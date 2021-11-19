@@ -13,7 +13,7 @@ import {
 export default function Home() {
   return (
     <Main>
-      <Title>Bem vindo ao GratiBox</Title>
+      <Title margin="53px">Bem vindo ao GratiBox</Title>
       <SubTitle>
         Receba em casa um box com chás, produtos organicos, incensos e muito
         mais...
@@ -22,7 +22,7 @@ export default function Home() {
         <Image src="https://raw.githubusercontent.com/driven-exercises/Projeto-GratiBox/main/image05.webp" />
         <Footer>
           <Link to="/sign-up">
-            <Button width="202px" height="45px">
+            <Button width="202px" height="45px" size="18px">
               Quero começar
             </Button>
           </Link>

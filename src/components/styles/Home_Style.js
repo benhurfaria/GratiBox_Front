@@ -21,7 +21,7 @@ const Title = styled.p`
   font-size: 28px;
   text-align: center;
   color: #ffffff;
-  margin-top: 53px;
+  margin-top: ${(props) => props.margin};
 `;
 const SubTitle = styled.p`
   width: 341px;
@@ -39,7 +39,8 @@ const Button = styled.button`
   background-color: #8c97ea;
   color: #ffffff;
   font-weight: bold;
-  font-size: 18px;
+  margin-top: ${(props) => props.margin};
+  font-size: ${(props) => props.size};
   :focus {
     outline: transparent;
   }
