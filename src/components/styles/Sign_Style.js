@@ -4,7 +4,7 @@ const Input = styled.input`
   background: #ffffff;
   border-radius: 10px;
   width: 100%;
-  height: 50px;
+  height: 64px;
   margin-bottom: 10px;
   margin-top: ${(props) => props.margin};
   font-family: 'Roboto', sans-serif;
