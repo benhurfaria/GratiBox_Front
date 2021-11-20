@@ -6,7 +6,7 @@ function signUp(body) {
   const route = 'sign-up';
 
   const promise = axios.post(api + route, body);
-  console.log(api);
+
   promise.catch((err) => {
     if (err.response.status === 400) {
       alert('Não foi possível cadastrar');

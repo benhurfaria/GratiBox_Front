@@ -4,6 +4,7 @@ import GlobalStyle from './assets/GlobalStyle';
 import Home from './components/pages/Home';
 import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
+import Plans from './components/pages/Plans';
 import { ContextLogin } from './Services/context';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/sign-up" element={<Signup />} />
           <Route exact path="/sign-in" element={<Signin />} />
+          <Route exact path="/plans" element={<Plans/>}/>
         </Routes>
       </BrowserRouter>
     </ContextLogin.Provider>
