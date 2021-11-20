@@ -57,7 +57,13 @@ export default function Signup() {
         value={confirm}
         onChange={(e) => setConfirm(e.target.value)}
       />
-      <Button width="237px" height="56px" size="36px" margin="60px" onClick={signUpUser}>
+      <Button
+        width="237px"
+        height="56px"
+        size="36px"
+        margin="60px"
+        onClick={signUpUser}
+      >
         Cadastrar
       </Button>
     </Main>

@@ -39,7 +39,13 @@ export default function Signin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button width="237px" height="56px" size="36px" margin="150px" onClick={login}>
+      <Button
+        width="237px"
+        height="56px"
+        size="36px"
+        margin="150px"
+        onClick={login}
+      >
         Login
       </Button>
       <Link to="/sign-up">
