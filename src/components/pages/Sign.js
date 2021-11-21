@@ -1,6 +1,8 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-nested-ternary */
 import { useContext, useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
-import { Title, SubTitle } from '../styles/Home_Style';
+import { Title, SubTitle, Button } from '../styles/Home_Style';
 import {
   Main,
   Container,
@@ -10,19 +12,30 @@ import {
   Input,
   Label,
   Auxiliar,
+  InputN,
 } from '../styles/SignPlan_Style';
 import { ContextLogin } from '../../Services/context';
 
 export default function Sign() {
   const { loggedUser } = useContext(ContextLogin);
-  const [setaPlano, setSetaPlano] = useState(false);
-  const [setaEntrega, setSetaEntrega] = useState(false);
-  const [setaRecebe, setSetaRecebe] = useState(false);
+  const [setaPlanoSemanal, setSetaPlanoSemanal] = useState(false);
+  const [setaPlanoMensal, setSetaPlanoMensal] = useState(false);
   const [opcoesPlano, setOpcoesPlano] = useState(false);
   const [entrega, setEntrega] = useState(false);
   const [quero, setQuero] = useState(false);
-  const [plano, setPlano] = useState('');
-
+  const [primeiraOpcao, setPrimeiraOpcao] = useState(false);
+  const [segundaOpcao, setSegundaOpcao] = useState(false);
+  const [terceiraOpcao, setTerceiraOpcao] = useState(false);
+  const [chas, setChas] = useState(false);
+  const [incensos, setIncensos] = useState(false);
+  const [produtos, setProdutos] = useState(false);
+  const [endereco, setEndereco] = useState(false);
+  const [proximo, setProximo] = useState('Proximo');
+  const [name, setName] = useState('');
+  const [endEntrega, setEndEntrega] = useState('');
+  const [cep, setCep] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estadouf, setEstadouf] = useState('');
   useEffect(() => {});
   return (
     <Main>
@@ -32,6 +45,15 @@ export default function Sign() {
       </SubTitle>
       <Container>
         <Image src="https://raw.githubusercontent.com/driven-exercises/Projeto-GratiBox/main/image03.jpg" />
+        {endereco ? <>
+          <InputN placeholder="Nome completo" width="290px" height="44px" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+          <InputN placeholder="Endereço de entrega" width="290px" height="44px" type="text" value={endEntrega} onChange={(e) => setEndEntrega(e.target.value)}/>
+          <InputN placeholder="CEP" width="290px" height="44px" value={cep} onChange={(e) => setCep(e.target.value)}/>
+          <Auxiliar>
+            <InputN placeholder="Cidade" width="168px" height="44px" type="text" value={cidade} onChange={(e) => setCidade(e.target.value)}/>
+            <InputN placeholder="Estado" width="108px" height="44px" type="text" value={estadouf} onChange={(e) => setEstadouf(e.target.value)}/>
+          </Auxiliar>
+        </> : <>
         <Marcar height={opcoesPlano ? '70px' : '44px'}>
           <Auxiliar>
             <Item>Plano</Item>
@@ -52,16 +74,22 @@ export default function Sign() {
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={setaPlanoMensal}
+                  onChange={() => {
+                    setSetaPlanoMensal(!setaPlanoMensal);
+                    if (setaPlanoSemanal) setSetaPlanoSemanal(!setaPlanoSemanal);
+                  }}
                 />
                 Mensal
               </Label>
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={setaPlanoSemanal}
+                  onChange={() => {
+                    setSetaPlanoSemanal(!setaPlanoSemanal);
+                    if (setaPlanoMensal) setSetaPlanoMensal(!setaPlanoMensal);
+                  }}
                 />
                 Semanal
               </Label>
@@ -90,25 +118,45 @@ export default function Sign() {
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={primeiraOpcao}
+                  onChange={() => {
+                    setPrimeiraOpcao(!primeiraOpcao);
+                    if (segundaOpcao) setSegundaOpcao(!segundaOpcao);
+                    if (terceiraOpcao) setTerceiraOpcao(!terceiraOpcao);
+                  }}
                 />
-                Mensal
+                {setaPlanoSemanal ? 'segunda' : setaPlanoMensal ? '1' : ''}
               </Label>
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={segundaOpcao}
+                  onChange={() => {
+                    setSegundaOpcao(!segundaOpcao);
+                    if (primeiraOpcao) setPrimeiraOpcao(!primeiraOpcao);
+                    if (terceiraOpcao) setTerceiraOpcao(!terceiraOpcao);
+                  }}
                 />
-                Semanal
+                {setaPlanoSemanal ? 'quarta' : setaPlanoMensal ? '10' : ''}
+              </Label>
+              <Label>
+                <Input
+                  type="checkbox"
+                  checked={terceiraOpcao}
+                  onChange={() => {
+                    setTerceiraOpcao(!terceiraOpcao);
+                    if (primeiraOpcao) setPrimeiraOpcao(!primeiraOpcao);
+                    if (segundaOpcao) setSegundaOpcao(!segundaOpcao);
+                  }}
+                />
+                {setaPlanoSemanal ? 'sexta' : setaPlanoMensal ? '20' : ''}
               </Label>
             </Auxiliar>
           ) : (
             ''
           )}
         </Marcar>
-        <Marcar height={quero ? '70px' : '44px'}>
+        <Marcar height={quero ? '90px' : '44px'}>
           <Auxiliar>
             <Item>Quero receber</Item>
             {quero ? (
@@ -128,25 +176,44 @@ export default function Sign() {
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={chas}
+                  onChange={() => {
+                    setChas(!chas);
+                  }}
                 />
-                Mensal
+                Chás
               </Label>
               <Label>
                 <Input
                   type="checkbox"
-                  checked={setaPlano}
-                  onChange={() => setSetaPlano(!setaPlano)}
+                  checked={incensos}
+                  onChange={() => setIncensos(!incensos)}
                 />
-                Semanal
+                Incensos
+              </Label>
+              <Label>
+                <Input
+                  type="checkbox"
+                  checked={produtos}
+                  onChange={() => setProdutos(!produtos)}
+                />
+                Produtos organicos
               </Label>
             </Auxiliar>
           ) : (
             ''
           )}
         </Marcar>
+        </>}
       </Container>
+      <Button width="202px" height="39px" margin="5px" size="24px" onClick={() => {
+        if ((setaPlanoSemanal || setaPlanoMensal) && (primeiraOpcao || segundaOpcao || terceiraOpcao) && (chas || incensos || produtos) && proximo === 'Proximo') {
+          setProximo('Finalizar');
+          setEndereco(!endereco);
+        } else {
+          alert('Você não selecionou todos os itens');
+        }
+      }}>{proximo}</Button>
     </Main>
   );
 }

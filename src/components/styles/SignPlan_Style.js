@@ -10,7 +10,7 @@ const Main = styled.div`
 `;
 
 const Container = styled.div`
-  height: 400px;
+  height: 410px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -46,6 +46,7 @@ const Auxiliar = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 5px;
 `;
 
@@ -75,10 +76,30 @@ const Input = styled.input`
     color: #604848;
   }
 `;
-
+const InputN = styled.input`
+  background: rgba(224, 209, 237, 0.62);
+  border-radius: 5px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  margin-bottom: 10px;
+  margin-top: ${(props) => props.margin};
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  color: #000000;
+  border: 1px solid #604848;
+  padding-left: 15px;
+  :focus {
+    outline: transparent;
+  }
+  input::placeholder{
+    color: #4D65A8;
+  }
+`;
 const Label = styled.label`
     font-size: 18px;
     color: #4D65A8;
 `;
 
-export { Main, Container, Image, Marcar, Item, Input, Label, Auxiliar };
+export { Main, Container, Image, Marcar, Item, Input, Label, Auxiliar, InputN };

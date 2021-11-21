@@ -6,6 +6,7 @@ import Signup from './components/pages/Signup';
 import Signin from './components/pages/Signin';
 import Plans from './components/pages/Plans';
 import Sign from './components/pages/Sign';
+import Details from './components/pages/Details';
 import { ContextLogin } from './Services/context';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
           <Route exact path="/sign-in" element={<Signin />} />
           <Route exact path="/plans" element={<Plans />} />
           <Route exact path="/sign" element={<Sign />} />
+          <Route exact path="/details" element={<Details/>}/>
         </Routes>
       </BrowserRouter>
     </ContextLogin.Provider>
