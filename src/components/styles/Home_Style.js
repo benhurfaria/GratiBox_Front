@@ -16,7 +16,6 @@ const Image = styled.img`
 `;
 
 const Title = styled.p`
-  width: 100%;
   font-weight: bold;
   font-size: 28px;
   text-align: center;
@@ -24,11 +23,11 @@ const Title = styled.p`
   margin-top: ${(props) => props.margin};
 `;
 const SubTitle = styled.p`
-  width: 341px;
   font-weight: 300;
   font-size: 18px;
   text-align: center;
   color: #ffffff;
+  margin-top: ${(props) => props.margin};
 `;
 
 const Button = styled.button`

@@ -4,6 +4,7 @@ import { Input, Main } from '../styles/Sign_Style';
 import { Title, Button, Grato } from '../styles/Home_Style';
 import { ContextLogin } from '../../Services/context';
 import { signIn } from '../../Services/Api';
+import { storeUser } from '../../Services/loginPersistence.js';
 
 export default function Signin() {
   const { setLoggedUser } = useContext(ContextLogin);
@@ -19,7 +20,12 @@ export default function Signin() {
     const promise = signIn(body);
     promise.then((resp) => {
       setLoggedUser(resp.data);
-      history('/home');
+      storeUser(resp.data);
+      if (resp.data.services === null) {
+        history('/plans');
+      } else {
+        history('/details');
+      }
     });
   }
 
@@ -39,7 +45,13 @@ export default function Signin() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button width="237px" height="56px" size="36px" margin="150px" onClick={login}>
+      <Button
+        width="237px"
+        height="56px"
+        size="36px"
+        margin="150px"
+        onClick={login}
+      >
         Login
       </Button>
       <Link to="/sign-up">
