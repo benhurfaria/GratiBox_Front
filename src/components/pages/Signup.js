@@ -58,6 +58,7 @@ export default function Signup() {
         onChange={(e) => setConfirm(e.target.value)}
       />
       <Button
+        type="submit"
         width="237px"
         height="56px"
         size="36px"
