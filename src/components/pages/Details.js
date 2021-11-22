@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { useContext, useEffect, useState } from 'react';
+import { MdExitToApp } from 'react-icons/md';
 import dayjs from 'dayjs';
 import { Title, SubTitle, Button } from '../styles/Home_Style';
 import { Main, Image } from '../styles/SignPlan_Style';
@@ -71,6 +72,7 @@ export default function Details() {
   }, [delivery]);
   return (
     <Main>
+      <MdExitToApp/>
       <Title>Bom te ver por aqui, @{loggedUser.name}</Title>
       <SubTitle margin="40px">
         “Agradecer é arte de atrair coisas boas”
