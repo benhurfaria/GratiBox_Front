@@ -7,6 +7,10 @@ const Main = styled.div`
   padding: 40px 25px;
   flex-direction: column;
   align-items: center;
+  svg{
+    color: #fff;
+    font-size: 30px;
+  }
 `;
 
 const Container = styled.div`

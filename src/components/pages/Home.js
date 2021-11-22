@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Main,
   Image,
@@ -9,8 +10,16 @@ import {
   Footer,
   Support,
 } from '../styles/Home_Style';
+import { getStoredUser } from '../../Services/loginPersistence.js';
 
 export default function Home() {
+  const history = useNavigate();
+  useEffect(() => {
+    const user = getStoredUser();
+    if (user !== null) {
+      history('/sign-in');
+    }
+  }, []);
   return (
     <Main>
       <Title margin="53px">Bem vindo ao GratiBox</Title>

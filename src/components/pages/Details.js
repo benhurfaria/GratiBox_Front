@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MdExitToApp } from 'react-icons/md';
 import dayjs from 'dayjs';
 import { Title, SubTitle, Button } from '../styles/Home_Style';
@@ -15,6 +16,7 @@ import {
   Span,
 } from '../styles/Details_Style';
 import { getDetails } from '../../Services/Api.js';
+import { getStoredUser } from '../../Services/loginPersistence.js';
 
 export default function Details() {
   const { loggedUser, setLoggedUser } = useContext(ContextLogin);
@@ -22,6 +24,7 @@ export default function Details() {
   const [products, setProducts] = useState([]);
   const [delivery, setDelivery] = useState('');
   const [datas, setDatas] = useState([]);
+  const history = useNavigate();
   function datasEntrega() {
     const today = new Date();
     const dataFormatada = `${today.getFullYear()}-${
@@ -60,8 +63,13 @@ export default function Details() {
     }
     setDatas(arrayDatas);
   }
+  function loggout() {
+    localStorage.clear();
+    history('/');
+  }
   useEffect(() => {
-    const { id } = loggedUser;
+    const { id } = getStoredUser();
+    setLoggedUser(getStoredUser());
     const promise = getDetails({ id });
     promise.then((resp) => {
       setServices(resp.data.services);
@@ -72,7 +80,7 @@ export default function Details() {
   }, [delivery]);
   return (
     <Main>
-      <MdExitToApp/>
+      <MdExitToApp onClick={loggout}/>
       <Title>Bom te ver por aqui, @{loggedUser.name}</Title>
       <SubTitle margin="40px">
         “Agradecer é arte de atrair coisas boas”

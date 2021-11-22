@@ -17,6 +17,7 @@ import {
 } from '../styles/SignPlan_Style';
 import { ContextLogin } from '../../Services/context';
 import { detailsSign } from '../../Services/Api.js';
+import { storeUser, getStoredUser } from '../../Services/loginPersistence.js';
 
 export default function Sign() {
   const { loggedUser } = useContext(ContextLogin);
@@ -95,6 +96,7 @@ export default function Sign() {
     };
     const promise = detailsSign(body);
     promise.then(() => {
+      storeUser({ ...loggedUser, services: '' });
       history('/details');
     });
   }
