@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-expressions */
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Input, Main } from '../styles/Sign_Style';
 import { Title, Button, Grato } from '../styles/Home_Style';
 import { ContextLogin } from '../../Services/context';
 import { signIn } from '../../Services/Api';
-import { storeUser } from '../../Services/loginPersistence.js';
+import { storeUser, getStoredUser } from '../../Services/loginPersistence.js';
 
 export default function Signin() {
   const { setLoggedUser } = useContext(ContextLogin);
@@ -28,7 +29,6 @@ export default function Signin() {
       }
     });
   }
-
   return (
     <Main>
       <Title>Bem vindo ao GratiBox</Title>

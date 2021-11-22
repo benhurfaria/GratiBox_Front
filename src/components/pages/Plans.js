@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Title, SubTitle, Button } from '../styles/Home_Style';
 import { ContextLogin } from '../../Services/context';
 import { Container, Image, Main, Texto } from '../styles/Plans_Style';
+import { getStoredUser } from '../../Services/loginPersistence';
 
 export default function Plans() {
-  const { loggedUser } = useContext(ContextLogin);
+  const { loggedUser, setLoggedUser } = useContext(ContextLogin);
   const history = useNavigate();
   return (
     <Main>
