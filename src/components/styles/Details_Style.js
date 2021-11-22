@@ -55,4 +55,9 @@ const Next = styled.p`
     color: #e63c80;
     font-weight: bold;
 `;
-export { Detail, Info, Next, Container, InfoProd, Footer };
+
+const Span = styled.span`
+  font-size: 18px;
+`;
+
+export { Detail, Info, Next, Container, InfoProd, Footer, Span };

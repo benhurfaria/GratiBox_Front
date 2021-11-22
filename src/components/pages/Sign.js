@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-nested-ternary */
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import { Title, SubTitle, Button } from '../styles/Home_Style';
 import {
@@ -15,6 +16,7 @@ import {
   InputN,
 } from '../styles/SignPlan_Style';
 import { ContextLogin } from '../../Services/context';
+import { detailsSign } from '../../Services/Api.js';
 
 export default function Sign() {
   const { loggedUser } = useContext(ContextLogin);
@@ -36,7 +38,66 @@ export default function Sign() {
   const [cep, setCep] = useState('');
   const [cidade, setCidade] = useState('');
   const [estadouf, setEstadouf] = useState('');
-  useEffect(() => {});
+  const history = useNavigate();
+  function statusPlano() {
+    let plano;
+    let dataEntrega;
+    let produto = '';
+    if (setaPlanoMensal) {
+      plano = 'mensal';
+    }
+    if (setaPlanoSemanal) {
+      plano = 'semanal';
+    }
+    if (primeiraOpcao) {
+      if (setaPlanoSemanal) {
+        dataEntrega = 'segunda';
+      }
+      if (setaPlanoMensal) {
+        dataEntrega = '01';
+      }
+    }
+    if (segundaOpcao) {
+      if (setaPlanoSemanal) {
+        dataEntrega = 'quarta';
+      }
+      if (setaPlanoMensal) {
+        dataEntrega = '10';
+      }
+    }
+    if (terceiraOpcao) {
+      if (setaPlanoSemanal) {
+        dataEntrega = 'sexta';
+      }
+      if (setaPlanoMensal) {
+        dataEntrega = '20';
+      }
+    }
+    if (chas) {
+      produto += 'cha ';
+    }
+    if (produtos) {
+      produto += 'produtos ';
+    }
+    if (incensos) {
+      produto += 'incensos ';
+    }
+    const body = {
+      plano,
+      dataEntrega,
+      produto,
+      name,
+      endEntrega,
+      cep,
+      cidade,
+      estadouf,
+      id: loggedUser.id,
+    };
+    const promise = detailsSign(body);
+    promise.then(() => {
+      history('/details');
+    });
+  }
   return (
     <Main>
       <Title>Bom te ver por aqui, @{loggedUser.name}.</Title>
@@ -207,10 +268,13 @@ export default function Sign() {
         </>}
       </Container>
       <Button width="202px" height="39px" margin="5px" size="24px" onClick={() => {
+        if (endEntrega && cep && cidade && estadouf && name && proximo === 'Finalizar') {
+          statusPlano();
+        }
         if ((setaPlanoSemanal || setaPlanoMensal) && (primeiraOpcao || segundaOpcao || terceiraOpcao) && (chas || incensos || produtos) && proximo === 'Proximo') {
           setProximo('Finalizar');
           setEndereco(!endereco);
-        } else {
+        } else if (proximo === 'Proximo') {
           alert('Você não selecionou todos os itens');
         }
       }}>{proximo}</Button>

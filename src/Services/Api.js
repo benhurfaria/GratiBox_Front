@@ -37,4 +37,26 @@ function signIn(body) {
   return promise;
 }
 
-export { signUp, signIn };
+function detailsSign(body) {
+  const route = 'userServices';
+  const promise = axios.post(api + route, body);
+  promise.catch((err) => {
+    if (err.response.status === 500) {
+      alert('banco indisponivel');
+    }
+  });
+  return promise;
+}
+
+function getDetails(body) {
+  const route = 'getservice';
+  const promise = axios.post(api + route, body);
+  promise.catch((err) => {
+    if (err.response.status === 500) {
+      alert('banco indisponivel');
+    }
+  });
+  return promise;
+}
+
+export { signUp, signIn, detailsSign, getDetails };
